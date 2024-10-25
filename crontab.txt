@@ -1,0 +1,8 @@
+# データベースとメディアの日次バックアップ（毎日午前3時）
+0 3 * * * cd /path/to/app && node scripts/backup.js >> logs/backup.log 2>&1
+
+# ログのローテーション（毎週月曜日午前2時）
+0 2 * * 1 cd /path/to/app && find logs -name "*.log" -mtime +7 -exec gzip {} \;
+
+# ヘルスチェック（5分ごと）
+*/5 * * * * curl -f http://localhost:3000/api/health >> logs/health.log 2>&1
